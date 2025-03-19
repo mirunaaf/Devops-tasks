@@ -47,7 +47,7 @@ ping -c 3 google-dns
 apt install -y netcat-openbsd  
 ```
 
--run:
+- run:
 ```
 nc -zv google-dns 53
 ```
