@@ -1,7 +1,12 @@
 name: Deploy Application
 
 on:
-  workflow_call:
+  push:
+    branches:
+      - main
+    paths:
+      - '2-app/**'
+      
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
