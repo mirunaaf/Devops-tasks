@@ -7,8 +7,8 @@ on:
       - master
 
 jobs:
-  deploy-app:
-    uses: ./.github/workflows/2-app/workflows/deploy.yml 
+  build-push-app:
+    uses: ./.github/workflows/2-app/workflows/build-push.yml 
 
 
 
