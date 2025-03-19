@@ -10,6 +10,10 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 2-app
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,8 +30,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile
+          context: 2-app
+          file: 2-app/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/python-app:latest
