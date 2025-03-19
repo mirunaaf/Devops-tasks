@@ -1,0 +1,48 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy-app:
+    uses: ./.github/workflows/2-app/workflows/deploy.yml 
+
+
+
+
+# name: Docker Build and Push
+
+# on:
+#   push:
+#     branches:
+#       - main
+#       - master
+
+# jobs:
+#   build-and-push:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v1
+
+#       - name: Login to Docker Hub
+#         uses: docker/login-action@v2
+#         with:
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+
+#       - name: Build and push
+#         uses: docker/build-push-action@v2
+#         with:
+#           context: .
+#           file: ./Dockerfile
+#           push: true
+#           tags: |
+#             mirunaf/python-app:latest
+#             mirunaf/python-app:${{ github.sha }}
