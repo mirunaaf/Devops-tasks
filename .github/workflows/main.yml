@@ -1,0 +1,10 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    uses: ./2-app/.github/workflows/build-push.yml
