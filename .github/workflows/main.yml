@@ -7,4 +7,4 @@ on:
 
 jobs:
   build-and-push:
-    uses: 2-app/.github/workflows/build-push.yml
+    uses: ./2-app/.github/workflows/build-push.yml
