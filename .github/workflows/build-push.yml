@@ -1,7 +1,10 @@
 name: Docker Build and Push
 
 on:
-  workflow_call:
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
   build-and-push:
