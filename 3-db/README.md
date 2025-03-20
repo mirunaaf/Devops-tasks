@@ -5,9 +5,9 @@
 - Do not use the default user, instead use one called "ituser".
 - Mount a volume for data persistance
   
-  ```
- docker run --name postgres-container -e POSTGRES_USER=ituser -e POSTGRES_PASSWORD=password -e POSTGRES_DB=company_db -p 5432:5432 -v pgdata:/var/lib/postgresql/data -d postgres
-  ```
+```
+docker run --name postgres-container -e POSTGRES_USER=ituser -e POSTGRES_PASSWORD=password -e POSTGRES_DB=company_db -p 5432:5432 -v pgdata:/var/lib/postgresql/data -d postgres
+```
 
 - Check if the container was created
   
