@@ -1,0 +1,36 @@
+Total Employees:
+ total_employees 
+-----------------
+              53
+(1 row)
+
+
+ Salaries per Department (Min & Max):
+ department_name  | min_salary | max_salary 
+------------------+------------+------------
+ Marketing        |   78000.00 |   91000.00
+ Operations       |  121000.00 |  131000.00
+ Legal            |   91000.00 |  143000.00
+ Finance          |   62000.00 |   76000.00
+ Customer Support |  109000.00 |  119000.00
+ Sales            |   93000.00 |  107000.00
+ IT               |   67000.00 |   94000.00
+ HR               |   50000.00 |   60000.00
+(8 rows)
+
+Enter department name: 
+ Names of employees in the 'IT' department:
+ first_name | last_name 
+------------+-----------
+ Bob        | Johnson
+ Charlie    | Brown
+ Hannah     | Martinez
+ Noah       | Lewis
+ Liam       | Clark
+ Emma       | Davis
+ Olivia     | Taylor
+ Lucas      | Baker
+ Ava        | Evans
+ William    | Nelson
+(10 rows)
+
