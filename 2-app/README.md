@@ -86,4 +86,3 @@ jobs:
             mirunaf/python-app:${{ github.sha }}
 
 ```
-...

@@ -1,6 +1,3 @@
--- Use the existing database
-USE company_db;
-
 -- Departments table
 CREATE TABLE departments (
     department_id SERIAL PRIMARY KEY,

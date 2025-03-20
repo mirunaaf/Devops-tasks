@@ -95,8 +95,7 @@ Bonus / Nice to Have:
 • Change the Nginx Listening port to 8080
 ```
 sed -i 's/listen 80/listen 8080/g' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80/listen [::]:8080/g' /etc/nginx/si
-tes-available/default
+sed -i 's/listen \[::\]:80/listen [::]:8080/g' /etc/nginx sites-available/default
 service nginx restart
 netstat -tulpn nginx
 
