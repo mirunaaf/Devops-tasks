@@ -129,9 +129,9 @@ WHERE department_id = (SELECT department_id FROM departments WHERE department_na
 
 - Calculate the highest and lowest salaries per department.
 ```
-docker exec -it postgres-container psql -U ituser -d company_db -c "SELECT d.department_name, MAX(s.salary) AS highest_salary, MIN(s.salary) AS lowest_salary FROM employees e JOIN salaries s ON e.employee_id = s.employee_id JOIN departments d ON e.department_id = d.department_id GROUP BY d.department_name;"
+docker exec -it postgres-container psql -U ituser -d company_db -c "SELECT d.department_name, MAX(s.salary) AS max_salary, MIN(s.salary) AS min_salary FROM employees e JOIN salaries s ON e.employee_id = s.employee_id JOIN departments d ON e.department_id = d.department_id GROUP BY d.department_name;"
 
- department_name  | highest_salary | lowest_salary 
+ department_name  | max_salary | min_salary 
 ------------------+----------------+---------------
  Customer Support |      119000.00 |     109000.00
  Marketing        |       91000.00 |      78000.00
@@ -150,3 +150,9 @@ docker exec -it postgres-container pg_dump -U ituser company_db > company_db_bkp
 ```
 
 4. Bash script
+
+- Starts a PostgreSQL container (if not already running).
+- Creates database (company_db) and users if they don’t exist.
+- Imports dataset (populatedb.sql) only if needed.
+Executes queries to retrieve employee data and salary details.
+Saves results to a log file (queries.log) and creates a database backup (backup.sql).

@@ -191,6 +191,59 @@ COPY public.employees (employee_id, first_name, last_name, department_id) FROM s
 51	Addison	Wood	8
 52	Ryan	Brooks	8
 53	Aubrey	Bennett	8
+54	Alice	Smith	1
+55	George	Anderson	1
+56	Mia	Rodriguez	1
+57	Ethan	Harris	1
+58	Sophia	King	1
+59	Bob	Johnson	2
+60	Charlie	Brown	2
+61	Hannah	Martinez	2
+62	Noah	Lewis	2
+63	Liam	Clark	2
+64	Emma	Davis	2
+65	Olivia	Taylor	2
+66	Lucas	Baker	2
+67	Ava	Evans	2
+68	William	Nelson	2
+69	David	Williams	3
+70	Isaac	Thomas	3
+71	Jack	White	3
+72	Grace	Robinson	3
+73	Daniel	Scott	3
+74	Victoria	Lopez	3
+75	Frank	Miller	4
+76	Karen	Lopez	4
+77	Henry	Wright	4
+78	Zoe	Allen	4
+79	Elijah	Parker	4
+80	Charlotte	Adams	4
+81	Samuel	Gonzalez	5
+82	Eleanor	Carter	5
+83	Jacob	Mitchell	5
+84	Michael	Perez	5
+85	Scarlett	Turner	5
+86	Benjamin	Phillips	5
+87	Madison	Campbell	5
+88	Daniel	Stewart	5
+89	Evelyn	Edwards	6
+90	Anthony	Collins	6
+91	Andrew	Morris	6
+92	Sofia	Reed	6
+93	Thomas	Ward	6
+94	Mila	Peterson	6
+95	Joshua	Howard	7
+96	Penelope	Ross	7
+97	Matthew	Cox	7
+98	Aria	Diaz	7
+99	Nathan	Sanchez	7
+100	Sebastian	Russell	7
+101	Nicholas	Bell	8
+102	Emily	Hayes	8
+103	Joseph	Perry	8
+104	Addison	Wood	8
+105	Ryan	Brooks	8
+106	Aubrey	Bennett	8
 \.
 
 
@@ -259,14 +312,14 @@ COPY public.salaries (employee_id, salary) FROM stdin;
 -- Name: departments_department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ituser
 --
 
-SELECT pg_catalog.setval('public.departments_department_id_seq', 8, true);
+SELECT pg_catalog.setval('public.departments_department_id_seq', 9, true);
 
 
 --
 -- Name: employees_employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ituser
 --
 
-SELECT pg_catalog.setval('public.employees_employee_id_seq', 53, true);
+SELECT pg_catalog.setval('public.employees_employee_id_seq', 106, true);
 
 
 --
