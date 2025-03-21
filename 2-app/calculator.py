@@ -1,6 +1,15 @@
+import signal
+import sys
 from flask import Flask, request, jsonify, render_template_string
 
 app = Flask(__name__)
+
+def shutdown_signal(signal, _):
+    print(f"Received shutdown signal: {signal}")
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, shutdown_signal)  
+signal.signal(signal.SIGINT, shutdown_signal)   
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>

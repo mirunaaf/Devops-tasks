@@ -14,16 +14,6 @@ nslookup cloudflare.com
 
 Server:         192.168.65.7
 Address:        192.168.65.7#53
-
-Non-authoritative answer:
-Name:   cloudflare.com
-Address: 104.16.132.229
-Name:   cloudflare.com
-Address: 104.16.133.229
-Name:   cloudflare.com
-Address: 2606:4700::6810:85e5
-Name:   cloudflare.com
-Address: 2606:4700::6810:84e5
 ```
 
 2. Map IP address 8.8.8.8 to hostname google-dns
@@ -65,12 +55,6 @@ results.
 nslookup cloudflare.com
 Server:         8.8.8.8
 Address:        8.8.8.8#53
-
-Non-authoritative answer:
-Name:   cloudflare.com
-Address: 104.16.132.229
-Name:   cloudflare.com
-Address: 104.16.133.229
 ```
 
 5. Install and verify that Nginx service is running

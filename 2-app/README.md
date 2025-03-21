@@ -51,23 +51,26 @@ Automate the following steps using GitHub Actions:
 - Push the Docker image to the Docker registry
 
 ```
-name: Docker Build and Push
+name: Deploy Application
 
 on:
   push:
     branches:
       - main
-      - master
-
+         
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 2-app
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -76,13 +79,60 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile
+          context: 2-app
+          file: 2-app/Dockerfile
           push: true
           tags: |
-            mirunaf/python-app:latest
-            mirunaf/python-app:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/python-app:latest
+            ${{ secrets.DOCKER_USERNAME }}/python-app:${{ github.sha }}
 
 ```
+4. Ensure the application catches the Docker container's stop signal and performs a clean shutdown
+
+- Adding Signal Handling in calculator.py
+  
+Modify calculator.py by adding this snippet to handle shutdown signals:
+
+```
+def shutdown_signal(signal, _):
+    print(f"Received shutdown signal: {signal}")
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, shutdown_signal)  
+signal.signal(signal.SIGINT, shutdown_signal)   
+```
+
+- Updating Gunicorn Configuration in Dockerfile
+
+Ensure Gunicorn handles shutdown signals correctly by adding:
+
+```
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "--timeout", "10", "--graceful-timeout", "10", "calculator:app"]
+```
+- Testing the graceful shutdown
+
+The container was started with:
+```
+docker start python-container
+```
+Then it was stopped using:
+```
+docker stop python-container
+```
+Checking logs using:
+
+```
+docker logs python-container
+```
+Results observed:
+
+```
+[2025-03-20 23:35:52 +0000] [1] [INFO] Handling signal: term
+[2025-03-20 23:35:52 +0000] [7] [INFO] Worker exiting (pid: 7)
+Received shutdown signal: 15
+```
+Gunicorn received SIGTERM from Docker.
+Gunicorn allowed the worker to shut down cleanly.
+Received shutdown signal: 15 -> this message comes from  the Python signal handler, confirming that the shutdown signal was caught and handled properly.

@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
 
- CMD ["gunicorn", "-b", "0.0.0.0:8080", "calculator:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "--timeout", "10", "--graceful-timeout", "10", "calculator:app"]

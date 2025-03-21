@@ -49,37 +49,8 @@ INSERT 0 53
 psql:/populatedb.sql:182: ERROR:  insert or update on table "salaries" violates foreign key constraint "salaries_employee_id_fkey"
 DETAIL:  Key (employee_id)=(54) is not present in table "employees".
 ```
-Option 1
 
-- Fix error:
- 1.drop constraint
- ```
- docker exec -it postgres-container psql -U ituser -d company_db -c "ALTER TABLE salaries DROP CONSTRAINT salaries_employee_id_fkey;" 
- ```
- 2. using sed to insert all the salaries
- ```
- docker exec -it postgres-container sh -c "sed -n '/INSERT INTO salaries/,/;/p' /populatedb.sql | psql -U ituser -d company_db"          
-INSERT 0 76
-```
-3. keep only the relevant data in the salaries table
-```
-docker exec -it postgres-container psql -U ituser -d company_db -c "
-DELETE FROM salaries WHERE employee_id NOT IN (SELECT employee_id FROM employees);"
-DELETE 23
-```
-4. checked the records in the salaries table
-```
- docker exec -it postgres-container psql -U ituser -d company_db -c "SELECT * FROM salaries;"          
- ```
-5. reintroduce the constraint
-```
-docker exec -it postgres-container psql -U ituser -d company_db -c "ALTER TABLE salaries                                                               
-ADD CONSTRAINT salaries_employee_id_fkey
-FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE;"
-ALTER TABLE
-```
-
-Option 2
+Fix the error:
 
 - Use JOIN to introduce salaries only for existent employees
 ```
@@ -151,8 +122,24 @@ docker exec -it postgres-container pg_dump -U ituser company_db > company_db_bkp
 
 4. Bash script
 
-- Starts a PostgreSQL container (if not already running).
+#### Create db-create2.sh script which:
+
+- Checks if the container already exists:
+  
+ If the container is running -> Show message
+ If the container exists but is stopped -> Start it
+ If the container doesn’t exist -> Create a new one
+
 - Creates database (company_db) and users if they don’t exist.
 - Imports dataset (populatedb.sql) only if needed.
-Executes queries to retrieve employee data and salary details.
-Saves results to a log file (queries.log) and creates a database backup (backup.sql).
+- Executes queries to retrieve employee data and salary details.
+- Saves results to a log file (queries.log) and creates a database backup (backup.sql).
+
+Make script executable using:
+```
+chmod +x db-create2.sh  
+```
+Ran script using:
+```
+./db-create2.sh   
+```
